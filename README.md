@@ -3,7 +3,7 @@ Learning SliDL, a Python library of pre- and post-processing tools for applying 
 [SliDL](https://github.com/markowetzlab/slidml) is a Python library for performing deep learning image analysis on whole-slide images (WSIs), including deep tissue, artefact, and background filtering, tile extraction, model inference, model evaluation and more. This repository serves to teach users how to apply `SliDL` on both a classification and a segmentation example problem from start to finish using best practices.
 
 <p align="center">
-  <img src="https://github.com/markowetzlab/slidl-tutorial/blob/main/figures/figure1.png" width="500" />
+  <img src="https://raw.githubusercontent.com/markowetzlab/slidl/main/docs/source/_static/figure1.png" width="700" />
 </p>
 
 Installing SliDL and its depedencies
