@@ -1,2 +1,82 @@
-# slidl-tutorial
-A tutorial demonstration of SliDL on an example dataset for the manuscript "SliDL: a toolbox for processing whole-slide images in deep learning" by Berman et al. 
+Learning SliDL, a Python library of pre- and post-processing tools for applying deep learning to whole-slide images
+=====
+[SliDL](https://github.com/markowetzlab/slidml) is a Python library for performing deep learning image analysis on whole-slide images (WSIs), including deep tissue, artefact, and background filtering, tile extraction, model inference, model evaluation and more. This repository serves to teach users how to apply `SliDL` on both a classification and a segmentation example problem from start to finish using best practices.
+
+<p align="center">
+  <img src="https://github.com/markowetzlab/slidl-tutorial/blob/main/figures/figure1.png" width="500" />
+</p>
+
+Installing SliDL and its depedencies
+----
+Install SliDL by cloning its repository:
+```
+git clone https://github.com/markowetzlab/slidl
+```
+
+SliDL is best run inside an Anaconda environment. Once you have [installed Anaconda](https://docs.anaconda.com/anaconda/install), you can create `slidl-env`, a conda environment containing all of SliDL's dependencies, then activate that environment. Make sure to adjust the path to your local path to the slidl repository:
+```
+conda env create -f /path/to/slidl/slidl-environment.yml
+conda activate slidl-env
+```
+Note that `slidl-environment.yml` installs Python version 3.7, PyTorch version 1.4, Torchvision version 0.5, and CUDA version 10.0. Stable versions above these should also work as long as the versions are cross-compatible. Be sure that the CUDA version matches the version installed on your GPU; if not, either update your GPU's CUDA or change the `cudatoolkit` line of `slidl-environment.yml` to match your GPU's version before creating `slidl-env`.
+
+Some users have run into an error message saying that something from libvips is missing when `SliDL` tries to import pyvips. This is because on some operating systems, the pip install of pyvips performed in the ```conda env create``` command leads to a flawed pyvips build. To solve this issue, also install pyvips using conda in `slidl-env`:
+```
+conda install -c conda-forge pyvips
+```
+
+For users who don't wish to use conda, `SliDL` can also be installed via pip. To do so, navigate to to the `slidl` directory containing `setup.py`, and run the following command:
+```
+pip install -e .
+```
+
+Running the SliDL tutorial
+----
+First clone this repository:
+```
+git clone https://github.com/markowetzlab/slidl-tutorial
+```
+The tutorial uses an example subset lymph node WSIs from the [CAMELYON16 challenge](https://camelyon16.grand-challenge.org/). Some of these WSIs contain breast cancer metastases and the goal of the tutorial is to use SliDL to train deep learning models to identify metastasis-containing slides and slide regions, and then to evaluate the performance of those models.
+
+Create a directory called `wsi_data` where there is at least 38 GB of disk space. Download the following 18 WSIs from the [CAMELYON16 dataset](https://drive.google.com/drive/folders/0BzsdkU4jWx9Ba2x1NTZhdzQ5Zjg?resourcekey=0-g2TRih6YKi5P2O1SiBB1LA) into `wsi_data`:
+
+* `normal/normal_001.tif`
+* `normal/normal_010.tif`
+* `normal/normal_028.tif`
+* `normal/normal_037.tif`
+* `normal/normal_055.tif`
+* `normal/normal_074.tif`
+* `normal/normal_111.tif`
+* `normal/normal_141.tif`
+* `normal/normal_160.tif`
+* `tumor/tumor_009.tif`
+* `tumor/tumor_011.tif`
+* `tumor/tumor_036.tif`
+* `tumor/tumor_039.tif`
+* `tumor/tumor_044.tif`
+* `tumor/tumor_046.tif`
+* `tumor/tumor_058.tif`
+* `tumor/tumor_076.tif`
+* `tumor/tumor_085.tif`
+
+Install Jupyter notebook into `slidl-env`:
+```
+conda install -c conda-forge notebook
+```
+Now that the requisite software and data have been downloaded, you are ready to begin the tutorial, which is contained in the Jupyter notebook `slidl-tutorial.ipynb` in this repository. Start notebook and then navigate to that document in the interface:
+```
+jupyter notebook
+```
+Once up and running, `slidl-tutorial.ipynb` contains instructions for running the tutorial. For instructions on running Jupyter notebooks, see the [Jupyter documentation](https://jupyter.org/documentation).
+
+The results of a completed tutorial run can be found [here](https://doi.org/10.5281/zenodo.5006409).
+
+The implementation of the [U-Net segmentation architecture](https://arxiv.org/abs/1505.04597) contained in this repository and some related segmentation code comes from [milesial's](https://github.com/milesial) [open source project](https://github.com/milesial/Pytorch-UNet).
+
+Documentation
+----
+The complete documentation for `SliDL` including its API reference can be found [here](https://slidl.readthedocs.io/).
+
+Disclaimer
+----
+Note that this is prerelease software. Please use accordingly.
